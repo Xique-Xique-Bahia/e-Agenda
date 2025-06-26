@@ -52,11 +52,9 @@ namespace eAgenda.WebApp.Controllers
                 if (item.Titulo.Equals(cadastrarVM.Titulo))
                 {
                     ModelState.AddModelError("CadastroUnico", "Já existe uma Categoria registrada com este Título.");
-                    break;
+                    return View(cadastrarVM);
                 }
             }
-            if (!ModelState.IsValid)
-                return View(cadastrarVM);
 
             var entidade = cadastrarVM.ParaEntidade();
 
@@ -89,7 +87,7 @@ namespace eAgenda.WebApp.Controllers
                 if (!item.Id.Equals(id) && item.Titulo.Equals(editarVM.Titulo))
                 {
                     ModelState.AddModelError("CadastroUnico", "Já existe uma categoria registrada com este título.");
-                    break;
+                    return View(editarVM);
                 }
             }
             if (c.idDespesas == null) c.idDespesas = new List<Guid>();
@@ -105,8 +103,7 @@ namespace eAgenda.WebApp.Controllers
             }
             editarVM.despesas = c.despesas;
             editarVM.idDespesas = c.idDespesas;
-            if (!ModelState.IsValid)
-                return View(editarVM);
+
             var entidadeEditada = editarVM.ParaEntidade();
             entidadeEditada.Id = id;
             repositorioCategoria.EditarRegistro(id, entidadeEditada);
@@ -142,12 +139,11 @@ namespace eAgenda.WebApp.Controllers
                 else if (item.Id.Equals(id) && item.idDespesas.Count > 0)
                 {
                     ModelState.AddModelError("ExclusaoProibida", "Não é possível excluir uma categoria que possui despesas associadas");
-                    break;
+                    return View(excluirVM);
                 }
                 
             }
 
-            if (!ModelState.IsValid) return View(excluirVM);
             repositorioCategoria.ExcluirRegistro(id);
 
             return RedirectToAction(nameof(Index));
@@ -197,8 +193,7 @@ namespace eAgenda.WebApp.Controllers
             {
                 ModelState.AddModelError("ExclusaoProibida", "Não é possível existir uma despesa sem uma categoria");
             }
-            if (!ModelState.IsValid)
-                return View(ExcluirVM);
+
             foreach (var item in repositorioDespesa.SelecionarRegistros())
             {
                 if(item.Id == despesaId)

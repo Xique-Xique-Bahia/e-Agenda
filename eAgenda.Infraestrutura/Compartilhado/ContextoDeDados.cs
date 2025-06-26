@@ -3,8 +3,6 @@ using eAgenda.Dominio.ModuloCompromisso;
 using eAgenda.Dominio.ModuloContato;
 using eAgenda.Dominio.ModuloDespesa;
 using eAgenda.Dominio.ModuloTarefa;
-using eAgenda.Dominio.ModuloDespesa;
-using eAgenda.Dominio.ModuloCategoria;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +16,10 @@ namespace eAgenda.Infraestrutura.Compartilhado
 {
     public class ContextoDeDados
     {
-        private string pastaArmazenamento = "C:\\temp";
-        private string arquivoArmazenamento = "dados-eAgenda.json";
+        private string pastaArmazenamento = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "eAgenda"
+        );
+        private string arquivoArmazenamento = "dados.json";
 
         public List<Contato> Contatos { get; set; }
         public List<Compromisso> Compromissos { get; set; }
