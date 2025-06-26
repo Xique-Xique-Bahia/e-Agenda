@@ -14,19 +14,13 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
-	
-<ItemGroup>Add commentMore actions
-    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
-  </ItemGroup>	<ItemGroup>
-		Add commentMore actions
-		<PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
-	
-	
+		
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+	  <ProjectReference Include="..\eAgenda.Dominio\eAgenda.Dominio.csproj" />
     <ProjectReference Include="..\eAgenda.Infraestrutura\eAgenda.Infraestrutura.csproj" />
   </ItemGroup>
 
