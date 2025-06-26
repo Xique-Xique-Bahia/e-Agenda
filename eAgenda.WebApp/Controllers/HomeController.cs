@@ -20,18 +20,25 @@ namespace eAgenda.WebApp.Controllers
             repositorioTarefa = new RepositorioTarefaEmArquivo(contextodados);
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var compromissos = repositorioCompromisso.SelecionarRegistros().Select
-                (c => new {Id = c.Id, Tipo = "Compromisso", Titulo = c.Assunto, Data = c.DataOcorrencia });
+                (c => new { Id = c.Id, Tipo = "Compromisso", Titulo = c.Assunto, Data = c.DataOcorrencia });
 
             var tarefas = repositorioTarefa.SelecionarTarefas().Select
-                (t => new {Id = t.Id, Tipo = "Tarefa", Titulo = t.Titulo, Data = t.DataConclusao != default ? t.DataConclusao : t.DataCriacao});
+                (t => new { Id = t.Id, Tipo = "Tarefa", Titulo = t.Titulo, Data = t.DataConclusao != default ? t.DataConclusao : t.DataCriacao });
 
             var itensDaAgenda = compromissos.Concat(tarefas).OrderBy(x => x.Data).ToList();
 
             ViewBag.ItensDaAgenda = itensDaAgenda;
 
+            return View();
+        }
+
+        [HttpGet("erro")]
+        public IActionResult Erro()
+        {
             return View();
         }
     }
