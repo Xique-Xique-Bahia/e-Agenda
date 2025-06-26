@@ -26,8 +26,6 @@ namespace eAgenda.WebApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            throw new NotImplementedException();
-
             var registros = repositorioCategoria.SelecionarRegistros();
 
             var visualizarVM = new VisualizarCategoriaViewModel(registros);
