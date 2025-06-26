@@ -53,16 +53,15 @@ namespace eAgenda.WebApp.Controllers
                 if (item.Email.Equals(cadastrarVM.Email))
                 {
                     ModelState.AddModelError("CadastroUnico", "Já existe um Contato registrado com este Email.");
+                    return View(cadastrarVM);
                 }
 
                 if (item.Telefone.Equals(cadastrarVM.Telefone))
                 {
                     ModelState.AddModelError("CadastroUnico", "Já existe um Contato registrado com este Telefone.");
+                    return View(cadastrarVM);
                 }
             }
-
-            if (!ModelState.IsValid)
-                return View(cadastrarVM);
 
             var entidade = cadastrarVM.ParaEntidade();
 
